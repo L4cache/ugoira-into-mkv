@@ -35,8 +35,8 @@ for i in ugoiras:
         _run=subprocess.run(f'ffmpeg -safe 0 -loglevel error -f concat -i "{_concatfile}" -c:v copy "{_mkv1}"',shell=True)
         if _run.returncode==0:
             _run2=subprocess.run(f'mkvmerge -o "{_mkv}" --no-global-tags --no-track-tags --compression 0:zlib --timestamps 0:"{_timestampfile}" {_mkv1}',shell=True)
-        if _run2.returncode==0:
-            pass
-        else:
-            _mkv.unlink(missing_ok=True)
+            if _run2.returncode==0:
+                pass
+            else:
+                _mkv.unlink(missing_ok=True)
 input('Press Enter to leave.')
